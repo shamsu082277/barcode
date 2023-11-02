@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        .container {
+            width: 160px;
+            height: 160px;
+            display: grid;
+            grid-template-columns: repeat(16, 10px);
+        }
+
+        .square {
+            width: 10px;
+            height: 10px;
+            background-color: #000;
+            border: 1px solid #ffffff;
+            transition: background-color 0.5s; /* Transition over 0.5 seconds */
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="gif-container"></div>
+
+    <script>
+        const container = document.getElementById('gif-container');
+
+        // Create 256 small squares
+        for (let i = 0; i < 256; i++) {
+            const square = document.createElement('div');
+            square.classList.add('square');
+            container.appendChild(square);
+        }
+
+        // Define a function to animate squares with random opacity
+        function animateSquares() {
+            const squares = container.querySelectorAll('.square');
+            squares.forEach((square) => {
+                const randomOpacity = Math.random();
+                square.style.backgroundColor = `rgba(0, 0, 0, ${randomOpacity})`;
+            });
+
+            // Request the next animation frame
+            requestAnimationFrame(animateSquares);
+        }
+
+        // Start the animation loop
+        animateSquares();
+    </script>
+</body>
+</html>
